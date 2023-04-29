@@ -1,66 +1,45 @@
 @extends('layouts.app')
-@section('title', 'Etudiant - Modifier')
+@section('title', 'Blog - Create')
 @section('content')
+@php $lang =  session('locale') @endphp
+
         <div class="row">
             <div class="col-12 text-center pt-2">
                 <h1 class="display-5">
-                    Ajouter Etudiant
+                    Ajouter un article
                 </h1>
-             
             </div> <!--/col-12-->
         </div><!--/row-->
-        <div class="col-md-6">
-            <a href="{{ route('index')}}" class="btn btn-success btn-sm">Return</a>
-        </div>
                 <hr>
-                <h2 class="display-8 pt-3">
-            </h2>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
                     <form method="post">
                     @csrf
-                    @method('post')
                         <div class="card-header">
-                            Formulaire
+                        @lang('lang.text_form')
                         </div>
-                        <div class="card-body">  
-                   
-                                <div class="control-group col-12">
-                                    <label for="title">Nom</label>
-                                    <input type="text" id="title" name="nom" class="form-control" required>
+                        <div class="card-body">   
+                                <div class="control-grup col-12">
+                                    <label for="title">@lang('lang.text_title_message')</label>
+                                    <input type="text" id="title" name="title" class="form-control" >
                                 </div>
-                                <div class="control-group col-12">
-                                    <label for="adresse">Adress</label>
-                                    <input type="text" id="title" name="adresse" class="form-control" required>
-                                </div>  
-                                <div class="control-group col-12">
-                                    <label for="phone">Telephone</label>
-                                    <input type="number" id="title" name="phone" class="form-control" required >
-                                </div> 
-                                <div class="control-group col-12">
-                                    <label for="email">Courriel</label>
-                                    <input type="email" id="title" name="email" class="form-control" required >
-                                </div> 
-                                <div class="control-group col-12">
-                                    <label for="date_de_naissance">Date De Naissaince</label>
-                                    <input type="date" id="date_de_naissance" name="date_de_naissance" class="form-control" required >
-                                </div> 
-
-                                <div class="control-group col-12">
-                                    <label for="ville">Ville</label>
-                                    <select id="ville" name="ville_id" class="form-control" required>
-                                    @foreach($villes as $ville)
-                                        <option value="{{ $ville->id }}" {{ $ville->ville_id == $ville->id ? 'selected' : '' }}>
-                                    {{ $ville->nom }} &#9658;
-                                        </option>
-                                     @endforeach
+                                <div class="control-grup col-12">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" id="message" name="body"></textarea>
+                                </div>
+                                <div class="control-grup col-12">
+                                    <label for="category">Category</label>
+                                    <select id="category" name="categories_id" class="form-control" required>
+                                    <option value="">@lang('lang.text_choose_category')</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id}}">{{ $category->category}} </option>
+                                        @endforeach
                                     </select>
                                 </div>
-                              
                         </div>
                         <div class="card-footer text-center">
-                            <input type="submit" class="btn btn-success" value="Ajouter">
+                            <input type="submit" class="btn btn-success" value="@lang('lang.text_add')">
                         </div>
                     </form>
                 </div>

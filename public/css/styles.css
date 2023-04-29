@@ -121,7 +121,7 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 h1, .h1 {
@@ -11114,9 +11114,11 @@ body {
 }
 
 .about-section {
+  height: 100vh;
   padding-top: 10rem;
   background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
 }
+
 .about-section p {
   margin-bottom: 5rem;
   color: white;
@@ -11202,5 +11204,24 @@ body {
 }
 
 .footer {
-  padding: 5rem 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+
+
+.flag-icon img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 20px ;
+  height: 20px;
+}
+
+
+.forgot-password {
+  color: var(--bs-blue);
+ 
 }

@@ -1,40 +1,32 @@
 @extends('layouts.app')
-@section('title', $etudiant->nom)
+@section('title', 'Blog - Welcome')
 @section('content')
     <div class="row mt-5">
         <div class="col-12">
-        <div class="col-md-6">
-            <a href="{{ route('index')}}" class="btn btn-success btn-sm">Return</a>
-        </div>
+            <a href="{{route('blog.index')}}" class="btn btn-primary btn-sm" >Return</a>
             <h2 class="display-8 pt-3">
-                {{ $etudiant->nom}}
+                {{ $blogPost->title}}
             </h2>
             <hr>
-                {!! $etudiant->body !!}
-                <p>Courriel:
-                {{ $etudiant->email}}
+                {!! $blogPost->body !!}
+                <p>
+                    Author : {{ $blogPost->blogHasUser->name }}
                 </p>
-              
-                <p>Address:
-                {{ $etudiant->adresse}}
-                </p>
-                <p>Telephone:
-                {{ $etudiant->phone}}
-                </p>
-                <p>Date de naissaince:
-                {{ $etudiant->date_de_naissance}}
-                </p>
-                <p>Ville:
-                {{ $etudiant->Ville->nom}}
+                <p>
+                  Category: {{ $blogPost->blogHasCategory->category ?? 'Aucune categorie'}}
+                  {{-- $blogPost->blogHasCategory?->category --}}
                 </p>
             <hr>
         </div>
     </div>
-    <div class="row text-center">
-        <div class="col-md-6">
-            <a href="{{ route('etudiant.edit', $etudiant->id)}}" class="btn btn-success btn-sm">Modifier</a>
+    <div class="row text-center mb-5">
+       <div class="col-md-4">
+          <a href="{{ route('blog.show.pdf', $blogPost->id)}}" class="btn btn-warning btn-sm">PDF</a>
+       </div>
+        <div class="col-md-4">
+            <a href="{{ route('blog.edit', $blogPost->id)}}" class="btn btn-success btn-sm">Modifier</a>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
                 <input type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete" value="Effacer">
         </div>
     </div>
@@ -49,7 +41,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Are you sure to delete the etudiant : {{ $etudiant->nom }}
+        Are you to delete the blog : {{ $blogPost->title }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

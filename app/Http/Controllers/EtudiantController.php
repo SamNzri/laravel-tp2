@@ -18,10 +18,12 @@ class EtudiantController extends Controller
     {
         $etudiants = Etudiant::with('ville')->get();
        
-        return view('blog.index', ['etudiants' => $etudiants]);
+        return view('etudiant.index', ['etudiants' => $etudiants]);
 
 
     }
+
+  
    //pdo->query(SELECT * FROM blog_posts)->fetchAll();
   
     /**
@@ -33,7 +35,7 @@ class EtudiantController extends Controller
     {
         $villes = Ville::all();
 
-        return view('blog.create', [ 'villes' => $villes]);
+        return view('etudiant.create', [ 'villes' => $villes]);
         }
     
 
@@ -68,7 +70,7 @@ class EtudiantController extends Controller
     {
         $etudiant = Etudiant::with('ville')->find($etudiant->id);
       
-        return view('blog.show', ['etudiant' => $etudiant]);
+        return view('etudiant.show', ['etudiant' => $etudiant]);
     }
 
     /**
@@ -82,7 +84,7 @@ class EtudiantController extends Controller
         $villes = Ville::all();
         $etudiant = Etudiant::with('ville')->find($etudiant->id);
       
-        return view('blog.edit', ['etudiant' => $etudiant, 'villes' => $villes]);
+        return view('etudiant.edit', ['etudiant' => $etudiant, 'villes' => $villes]);
     }
 
     /**

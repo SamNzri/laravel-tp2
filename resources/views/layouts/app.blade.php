@@ -12,21 +12,39 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+   
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
+        @php $lang =  session('locale') @endphp
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="https://www.cmaisonneuve.qc.ca/">Collège de Maisonneuve</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
+            <a class="navbar-brand" href="#">@lang('lang.text_hello') {{ Auth::user()->name ?? 'Guest' }}</a>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"> <a href="{{ route('etudiant.create') }}" class="nav-link">Ajouter Etudaiant</a></li>
+                    @guest
+                    <li class="nav-item"> <a href="{{ route('auth.create') }}" class="nav-link">@lang('lang.text_register')</a></li>
+                    <a class="nav-link --bs-blue" href="{{route('login')}}">@lang('lang.text_login')</a>
+                  @else
+                    <li class="nav-item"><a class="nav-link" href="{{ route('index')}}">@lang('lang.text_home')</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('etudiant.create') }}">@lang('lang.text_add_student')</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('user.list') }}" >@lang('lang.text_list_users')</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('blog.index')}}">Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('logout')}}">@lang('lang.text_logout')</a></li>
+                    @endguest
+                    @if($lang == 'en')
+                        <a class="flag-icon nav-link text-primary" href="{{route('lang', 'fr')}}">
+                            <img src="https://www.countryflags.com/wp-content/uploads/france-flag-png-large.png" alt="French" class="mr-1">
+                            Fr
+                        </a>
+                    @else
+                        <a class="flag-icon nav-link text-primary" href="{{route('lang', 'en')}}">
+                            <img src="https://www.countryflags.com/wp-content/uploads/united-kingdom-flag-png-large.png" alt="English" class="mr-1">
+                            En
+                        </a>
+                    @endif
                     </ul>
                 </div>
             </div>
